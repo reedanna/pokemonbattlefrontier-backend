@@ -1,0 +1,2 @@
+class SpeciesMovesController < ApplicationController
+end

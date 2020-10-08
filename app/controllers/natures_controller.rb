@@ -1,0 +1,2 @@
+class NaturesController < ApplicationController
+end
