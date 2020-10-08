@@ -4,7 +4,7 @@ class CreateMoves < ActiveRecord::Migration[6.0]
       t.string :name
       t.references :type, null: false, foreign_key: true
       t.string :category
-      t.integer :BP
+      t.integer :bp
       t.string :other_effects
 
       t.timestamps

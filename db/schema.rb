@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 11) do
     t.string "name"
     t.bigint "type_id", null: false
     t.string "category"
-    t.integer "BP"
+    t.integer "bp"
     t.string "other_effects"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
