@@ -8,6 +8,9 @@
 
 require 'poke-api-v2'
 
+#create test user
+User.create(name: "test", password_digest: "1234")
+
 #get types from API
 for i in 1..18
     type = PokeApi.get(type: i)
@@ -68,7 +71,7 @@ for i in 1..233
 end
 
 #get moves from API
-for i in 1..7
+for i in 1..742
     move = PokeApi.get(move: i)
     newMove = Move.create(name: move.name, 
         category: move.damage_class.name, 
@@ -110,5 +113,6 @@ for i in 1..807
         move = Move.find_by(name: species.moves[j-1].move.name)
         SpeciesMove.create(species_id: species.id, move_id: move.id)
     end
+
 
 end
