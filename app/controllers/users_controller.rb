@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     def index
         users = User.all
 
-        render json: users.to_json(:include => :pokemons)
+        render json: users.to_json(:include => { :pokemons => {:include => [:types, :species, {:moves => {:include => :type}}, :ability, :nature]}})
     end
 
     def show
