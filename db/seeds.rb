@@ -56,11 +56,12 @@ for i in 1..25
         stat_lowered: "none", 
         stat_raised: "none")
     
-    if (nature.increased_stat.class == String)
-        newNature.stat_lowered = nature.decreased_stat.name
-        newNature.stat_raised = nature.increased_stat.name
+    if (nature.increased_stat)
+        newNature.stat_lowered = nature.decreased_stat.name.split('-').join('_')
+        newNature.stat_raised = nature.increased_stat.name.split('-').join('_')
     end
 
+    newNature.save
 end
 
 #get abilities from API
