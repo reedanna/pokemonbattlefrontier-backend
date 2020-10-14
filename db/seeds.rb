@@ -75,13 +75,9 @@ for i in 1..742
     move = PokeApi.get(move: i)
     newMove = Move.create(name: move.name, 
         category: move.damage_class.name, 
-        bp: 0, 
+        bp: move.power, 
         other_effects: move.effect_entries.last.effect, 
         type: Type.find_by(name: move.type.name))
-
-    if (move.power.class == Integer)
-        newMove.bp = move.power
-    end
 end
 
 #get species from API

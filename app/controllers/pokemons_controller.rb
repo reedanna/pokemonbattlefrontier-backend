@@ -20,6 +20,13 @@ class PokemonsController < ApplicationController
         render json: pokemon.to_json(:include => [:species, :types, :user, :moves, :ability, :nature])
     end
 
+    def update
+        pokemon = Pokemon.find(params[:id])
+        pokemon.update(pokemon_params)
+
+        render json: pokemon.to_json(:include => [:species, :types, :user, :moves, :ability, :nature])
+    end
+
     private
     
     def pokemon_params
