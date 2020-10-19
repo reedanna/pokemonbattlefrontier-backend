@@ -27,6 +27,12 @@ class PokemonsController < ApplicationController
         render json: pokemon.to_json(:include => [:species, :types, :user, :moves, :ability, :nature])
     end
 
+    def destroy
+        pokemon = Pokemon.find(params[:id])
+        pokemon.destroy
+
+    end
+
     private
     
     def pokemon_params

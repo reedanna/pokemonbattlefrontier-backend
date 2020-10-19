@@ -1,6 +1,6 @@
 class SpeciesController < ApplicationController
     def index
-        species = Species.all
+        species = Species.all.order(:id)
 
         render json: species.to_json(:include => [:types, :abilities])
     end

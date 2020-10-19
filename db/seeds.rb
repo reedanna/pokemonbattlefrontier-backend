@@ -8,9 +8,6 @@
 
 require 'poke-api-v2'
 
-#create test user
-User.create(name: "test", password_digest: "1234")
-
 #get types from API
 for i in 1..18
     type = PokeApi.get(type: i)
@@ -76,13 +73,42 @@ for i in 1..233
 end
 
 #get moves from API
-for i in 1..742
+
+for i in 1..208
     move = PokeApi.get(move: i)
     newMove = Move.create(name: move.name.split('-').join(' ').capitalize(), 
         category: move.damage_class.name.capitalize(), 
         bp: move.power, 
-        other_effects: move.effect_entries.last.effect.gsub('$effect_chance%', move.effect_chance), 
+        other_effects: move.effect_entries.last.effect, 
         type: Type.find_by(name: move.type.name.capitalize()))
+
+        if newMove.other_effects['$effect_chance%']
+            newMove.update(other_effects: move.effect_entries.last.effect.gsub('$effect_chance%', move.effect_chance.to_s + "%"))
+        end
+end
+
+move = PokeApi.get(move: 'spark')
+newMove = Move.create(name: move.name.split('-').join(' ').capitalize(), 
+        category: move.damage_class.name.capitalize(), 
+        bp: move.power, 
+        other_effects: move.effect_entries.last.effect, 
+        type: Type.find_by(name: move.type.name.capitalize()))
+
+ if newMove.other_effects['$effect_chance%']
+    newMove.update(other_effects: move.effect_entries.last.effect.gsub('$effect_chance%', move.effect_chance.to_s + "%"))
+ end
+
+for i in 210..742
+    move = PokeApi.get(move: i)
+    newMove = Move.create(name: move.name.split('-').join(' ').capitalize(), 
+        category: move.damage_class.name.capitalize(), 
+        bp: move.power, 
+        other_effects: move.effect_entries.last.effect, 
+        type: Type.find_by(name: move.type.name.capitalize()))
+
+        if newMove.other_effects['$effect_chance%']
+            newMove.update(other_effects: move.effect_entries.last.effect.gsub('$effect_chance%', move.effect_chance.to_s + "%"))
+        end
 end
 
 #get species from API
@@ -112,7 +138,42 @@ for i in 1..807
     #add moves to species
     for j in 1..species.moves.length
         move = Move.find_by(name: species.moves[j-1].move.name.split('-').join(' ').capitalize())
-        SpeciesMove.create(species_id: species.id, move_id: move.id)
+        if move
+            SpeciesMove.create(species_id: species.id, move_id: move.id)
+        end
     end
-
 end
+
+#Fix some nonstandard Pokemon names
+Species.find_by(name: "Nidoran-f").update(name: "Nidoran(F)")
+Species.find_by(name: "Nidoran-m").update(name: "Nidoran(M)")
+Species.find_by(name: "Farfetchd").update(name: "Farfetch'd")
+Species.find_by(name: "Mr-mime").update(name: "Mr. Mime")
+Species.find_by(name: "Ho-oh").update(name: "Ho-Oh")
+Species.find_by(name: "Mime-jr").update(name: "Mime Jr.")
+Species.find_by(name: "Porygon-z").update(name: "Porygon-Z")
+Species.find_by(name: "Type-null").update(name: "Type: Null")
+Species.find_by(name: "Tapu-koko").update(name: "Tapu Koko")
+Species.find_by(name: "Tapu-lele").update(name: "Tapu Lele")
+Species.find_by(name: "Tapu-bulu").update(name: "Tapu Bulu")
+Species.find_by(name: "Tapu-fini").update(name: "Tapu Fini")
+Species.find_by(name: "Deoxys-normal").update(name: "Deoxys")
+Species.find_by(name: "Darmanitan-standard").update(name: "Darmanitan")
+Species.find_by(name: "Wormadam-plant").update(name: "Wormadam")
+Species.find_by(name: "Giratina-altered").update(name: "Giratina")
+Species.find_by(name: "Shaymin-land").update(name: "Shaymin")
+Species.find_by(name: "Basculin-red-striped").update(name: "Basculin")
+Species.find_by(name: "Tornadus-incarnate").update(name: "Tornadus")
+Species.find_by(name: "Thundurus-incarnate").update(name: "Thundurus")
+Species.find_by(name: "Landorus-incarnate").update(name: "Landorus")
+Species.find_by(name: "Keldeo-ordinary").update(name: "Keldeo")
+Species.find_by(name: "Meloetta-aria").update(name: "Meloetta")
+Species.find_by(name: "Meowstic-male").update(name: "Meowstic")
+Species.find_by(name: "Aegislash-shield").update(name: "Aegislash")
+Species.find_by(name: "Pumpkaboo-average").update(name: "Pumpkaboo")
+Species.find_by(name: "Gourgeist-average").update(name: "Gourgeist")
+Species.find_by(name: "Oricorio-baile").update(name: "Oricorio")
+Species.find_by(name: "Lycanroc-midday").update(name: "Lycanroc")
+Species.find_by(name: "Wishiwashi-solo").update(name: "Wishiwashi")
+Species.find_by(name: "Minior-red-meteor").update(name: "Minior")
+Species.find_by(name: "Mimikyu-disguised").update(name: "Mimikyu")
