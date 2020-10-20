@@ -21,7 +21,6 @@ class PokemonMovesController < ApplicationController
     def destroy
         pokemon_move = PokemonMove.find(params[:id])
         pokemon_move.destroy
-
     end
 
 
