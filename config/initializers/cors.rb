@@ -5,7 +5,7 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
-Rails.application.config.hosts << "http://localhost:3001/"
+Rails.application.config.hosts << "https://pokemonbattlefrontier.netlify.app/"
 Rails.application.config.hosts << "pbf-backend.herokuapp.com"
 
 

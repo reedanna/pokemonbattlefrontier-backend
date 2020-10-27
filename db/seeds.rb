@@ -74,31 +74,7 @@ end
 
 #get moves from API
 
-for i in 1..208
-    move = PokeApi.get(move: i)
-    newMove = Move.create(name: move.name.split('-').join(' ').capitalize(), 
-        category: move.damage_class.name.capitalize(), 
-        bp: move.power, 
-        other_effects: move.effect_entries.last.effect, 
-        type: Type.find_by(name: move.type.name.capitalize()))
-
-        if newMove.other_effects['$effect_chance%']
-            newMove.update(other_effects: move.effect_entries.last.effect.gsub('$effect_chance%', move.effect_chance.to_s + "%"))
-        end
-end
-
-move = PokeApi.get(move: 'spark')
-newMove = Move.create(name: move.name.split('-').join(' ').capitalize(), 
-        category: move.damage_class.name.capitalize(), 
-        bp: move.power, 
-        other_effects: move.effect_entries.last.effect, 
-        type: Type.find_by(name: move.type.name.capitalize()))
-
- if newMove.other_effects['$effect_chance%']
-    newMove.update(other_effects: move.effect_entries.last.effect.gsub('$effect_chance%', move.effect_chance.to_s + "%"))
- end
-
-for i in 210..742
+for i in 1..742
     move = PokeApi.get(move: i)
     newMove = Move.create(name: move.name.split('-').join(' ').capitalize(), 
         category: move.damage_class.name.capitalize(), 
