@@ -1,24 +1,13 @@
-# README
+# POKEMON BATTLE FRONTIER
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## INTRODUCTION
+Welcome to Pokemon Battle Frontier!
 
-Things you may want to cover:
+## USE INSTRUCTIONS
 
-* Ruby version
+## TECH STACK
+Backend:
 
-* System dependencies
+Frontend:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## FUTURE DEVELOPMENT GOALS
